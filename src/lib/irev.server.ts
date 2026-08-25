@@ -52,8 +52,10 @@ export type IrevRecentPu = {
   name: string;
   pu_code: string;
   updated_at: string;
-  lga?: { name?: string } | null;
-  ward?: { name?: string } | null;
+  polling_unit?: {
+    lga?: { name?: string } | null;
+    ward?: { name?: string } | null;
+  } | null;
   document?: { url?: string; updated_at?: string } | null;
   old_documents?: unknown[];
 };
@@ -110,8 +112,8 @@ export async function fetchRecentUploads(electionId: string, limit = 40): Promis
     id: p._id,
     puName: p.name,
     puCode: p.pu_code,
-    lga: p.lga?.name ?? "—",
-    ward: p.ward?.name ?? "—",
+    lga: p.polling_unit?.lga?.name ?? "—",
+    ward: p.polling_unit?.ward?.name ?? "—",
     sheetUrl: p.document?.url ?? null,
     uploadedAt: p.document?.updated_at ?? p.updated_at,
     replaced: Array.isArray(p.old_documents) && p.old_documents.length > 0,
