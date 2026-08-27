@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as MonitorRouteImport } from './routes/monitor'
 import { Route as RumRouteImport } from './routes/rum'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MonitorRoute = MonitorRouteImport.update({
+  id: '/monitor',
+  path: '/monitor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RumRoute = RumRouteImport.update({
@@ -25,27 +31,31 @@ const RumRoute = RumRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/monitor': typeof MonitorRoute
   '/rum': typeof RumRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/monitor': typeof MonitorRoute
   '/rum': typeof RumRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/monitor': typeof MonitorRoute
   '/rum': typeof RumRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/rum'
+  fullPaths: '/' | '/monitor' | '/rum'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/rum'
-  id: '__root__' | '/' | '/rum'
+  to: '/' | '/monitor' | '/rum'
+  id: '__root__' | '/' | '/monitor' | '/rum'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MonitorRoute: typeof MonitorRoute
   RumRoute: typeof RumRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/monitor': {
+      id: '/monitor'
+      path: '/monitor'
+      fullPath: '/monitor'
+      preLoaderRoute: typeof MonitorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/rum': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MonitorRoute: MonitorRoute,
   RumRoute: RumRoute,
 }
 export const routeTree = rootRouteImport
