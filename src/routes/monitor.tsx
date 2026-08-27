@@ -11,22 +11,23 @@ const electionsQuery = queryOptions({
   staleTime: 5 * 60_000,
 });
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/monitor")({
   head: () => ({
     meta: [
-      { title: "IReV Live Monitor — Nigerian Election Results Feed" },
+      { title: "The Monitor — Live IReV Upload Feed | TogetherNigeria" },
       {
         name: "description",
         content:
           "Real-time feed of INEC IReV polling-unit uploads: coverage, Form EC8A sheets, LGA breakdown and the full register of contesting parties.",
       },
-      { property: "og:title", content: "IReV Live Monitor" },
+      { property: "og:title", content: "The Monitor — TogetherNigeria" },
       {
         property: "og:description",
         content:
           "Real-time INEC IReV polling-unit uploads, Form EC8A sheets and coverage tracking.",
       },
     ],
+    links: [{ rel: "canonical", href: "/monitor" }],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(electionsQuery),
   component: Dashboard,
