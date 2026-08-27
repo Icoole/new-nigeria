@@ -79,7 +79,7 @@ export const STATE_RESULTS_2023: StateResult[] = [
   { state: "Sokoto", zone: "North West", registered: 2172056, votes: { APC: 285444, PDP: 288679, LP: 6568, NNPP: 4038 } },
   { state: "Taraba", zone: "North East", registered: 1777105, votes: { APC: 135165, PDP: 189017, LP: 146315, NNPP: 5325 } },
   { state: "Yobe", zone: "North East", registered: 1485146, votes: { APC: 151459, PDP: 198567, LP: 4552, NNPP: 9500 } },
-  { state: "Zamfara", zone: "North West", registered: 21e6 as unknown as number, votes: { APC: 298396, PDP: 194384, LP: 10608, NNPP: 4044 } },
+  { state: "Zamfara", zone: "North West", registered: 2096220, votes: { APC: 298396, PDP: 194384, LP: 10608, NNPP: 4044 } },
 ];
 
 export const PARTY_CODES: PartyCode[] = ["APC", "PDP", "LP", "NNPP"];
