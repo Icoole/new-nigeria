@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ElectionsRouteImport } from './routes/elections'
 import { Route as MonitorRouteImport } from './routes/monitor'
 import { Route as RumRouteImport } from './routes/rum'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ElectionsRoute = ElectionsRouteImport.update({
+  id: '/elections',
+  path: '/elections',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MonitorRoute = MonitorRouteImport.update({
@@ -31,30 +37,34 @@ const RumRoute = RumRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/elections': typeof ElectionsRoute
   '/monitor': typeof MonitorRoute
   '/rum': typeof RumRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/elections': typeof ElectionsRoute
   '/monitor': typeof MonitorRoute
   '/rum': typeof RumRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/elections': typeof ElectionsRoute
   '/monitor': typeof MonitorRoute
   '/rum': typeof RumRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/monitor' | '/rum'
+  fullPaths: '/' | '/elections' | '/monitor' | '/rum'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/monitor' | '/rum'
-  id: '__root__' | '/' | '/monitor' | '/rum'
+  to: '/' | '/elections' | '/monitor' | '/rum'
+  id: '__root__' | '/' | '/elections' | '/monitor' | '/rum'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ElectionsRoute: typeof ElectionsRoute
   MonitorRoute: typeof MonitorRoute
   RumRoute: typeof RumRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elections': {
+      id: '/elections'
+      path: '/elections'
+      fullPath: '/elections'
+      preLoaderRoute: typeof ElectionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/monitor': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ElectionsRoute: ElectionsRoute,
   MonitorRoute: MonitorRoute,
   RumRoute: RumRoute,
 }
