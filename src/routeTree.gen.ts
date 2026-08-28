@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AsoRockRouteImport } from './routes/aso-rock'
 import { Route as ElectionsRouteImport } from './routes/elections'
 import { Route as MonitorRouteImport } from './routes/monitor'
 import { Route as Results2023RouteImport } from './routes/results-2023'
@@ -18,6 +19,11 @@ import { Route as RumRouteImport } from './routes/rum'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AsoRockRoute = AsoRockRouteImport.update({
+  id: '/aso-rock',
+  path: '/aso-rock',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ElectionsRoute = ElectionsRouteImport.update({
@@ -43,6 +49,7 @@ const RumRoute = RumRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aso-rock': typeof AsoRockRoute
   '/elections': typeof ElectionsRoute
   '/monitor': typeof MonitorRoute
   '/results-2023': typeof Results2023Route
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aso-rock': typeof AsoRockRoute
   '/elections': typeof ElectionsRoute
   '/monitor': typeof MonitorRoute
   '/results-2023': typeof Results2023Route
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aso-rock': typeof AsoRockRoute
   '/elections': typeof ElectionsRoute
   '/monitor': typeof MonitorRoute
   '/results-2023': typeof Results2023Route
@@ -65,14 +74,23 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/elections' | '/monitor' | '/results-2023' | '/rum'
+  fullPaths:
+    '/' | '/aso-rock' | '/elections' | '/monitor' | '/results-2023' | '/rum'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/elections' | '/monitor' | '/results-2023' | '/rum'
-  id: '__root__' | '/' | '/elections' | '/monitor' | '/results-2023' | '/rum'
+  to: '/' | '/aso-rock' | '/elections' | '/monitor' | '/results-2023' | '/rum'
+  id:
+    | '__root__'
+    | '/'
+    | '/aso-rock'
+    | '/elections'
+    | '/monitor'
+    | '/results-2023'
+    | '/rum'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AsoRockRoute: typeof AsoRockRoute
   ElectionsRoute: typeof ElectionsRoute
   MonitorRoute: typeof MonitorRoute
   Results2023Route: typeof Results2023Route
@@ -86,6 +104,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aso-rock': {
+      id: '/aso-rock'
+      path: '/aso-rock'
+      fullPath: '/aso-rock'
+      preLoaderRoute: typeof AsoRockRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/elections': {
@@ -121,6 +146,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AsoRockRoute: AsoRockRoute,
   ElectionsRoute: ElectionsRoute,
   MonitorRoute: MonitorRoute,
   Results2023Route: Results2023Route,
