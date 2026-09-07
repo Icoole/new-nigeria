@@ -30,7 +30,7 @@ export const Route = createFileRoute("/insights")({
     ],
     links: [{ rel: "canonical", href: "/insights" }],
   }),
-  component: Insights;
+  component: Insights,
 });
 
 const nf = (n: number) => n.toLocaleString("en-NG");
