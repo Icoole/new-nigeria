@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AsoRockRouteImport } from './routes/aso-rock'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ElectionsRouteImport } from './routes/elections'
+import { Route as InsightsRouteImport } from './routes/insights'
 import { Route as MethodRouteImport } from './routes/method'
 import { Route as MonitorRouteImport } from './routes/monitor'
 import { Route as Results2023RouteImport } from './routes/results-2023'
@@ -27,9 +29,19 @@ const AsoRockRoute = AsoRockRouteImport.update({
   path: '/aso-rock',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ElectionsRoute = ElectionsRouteImport.update({
   id: '/elections',
   path: '/elections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsightsRoute = InsightsRouteImport.update({
+  id: '/insights',
+  path: '/insights',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MethodRoute = MethodRouteImport.update({
@@ -56,7 +68,9 @@ const RumRoute = RumRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/aso-rock': typeof AsoRockRoute
+  '/contact': typeof ContactRoute
   '/elections': typeof ElectionsRoute
+  '/insights': typeof InsightsRoute
   '/method': typeof MethodRoute
   '/monitor': typeof MonitorRoute
   '/results-2023': typeof Results2023Route
@@ -65,7 +79,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/aso-rock': typeof AsoRockRoute
+  '/contact': typeof ContactRoute
   '/elections': typeof ElectionsRoute
+  '/insights': typeof InsightsRoute
   '/method': typeof MethodRoute
   '/monitor': typeof MonitorRoute
   '/results-2023': typeof Results2023Route
@@ -75,7 +91,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/aso-rock': typeof AsoRockRoute
+  '/contact': typeof ContactRoute
   '/elections': typeof ElectionsRoute
+  '/insights': typeof InsightsRoute
   '/method': typeof MethodRoute
   '/monitor': typeof MonitorRoute
   '/results-2023': typeof Results2023Route
@@ -86,7 +104,9 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/aso-rock'
+    | '/contact'
     | '/elections'
+    | '/insights'
     | '/method'
     | '/monitor'
     | '/results-2023'
@@ -95,7 +115,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/aso-rock'
+    | '/contact'
     | '/elections'
+    | '/insights'
     | '/method'
     | '/monitor'
     | '/results-2023'
@@ -104,7 +126,9 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/aso-rock'
+    | '/contact'
     | '/elections'
+    | '/insights'
     | '/method'
     | '/monitor'
     | '/results-2023'
@@ -114,7 +138,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AsoRockRoute: typeof AsoRockRoute
+  ContactRoute: typeof ContactRoute
   ElectionsRoute: typeof ElectionsRoute
+  InsightsRoute: typeof InsightsRoute
   MethodRoute: typeof MethodRoute
   MonitorRoute: typeof MonitorRoute
   Results2023Route: typeof Results2023Route
@@ -137,11 +163,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AsoRockRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/elections': {
       id: '/elections'
       path: '/elections'
       fullPath: '/elections'
       preLoaderRoute: typeof ElectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insights': {
+      id: '/insights'
+      path: '/insights'
+      fullPath: '/insights'
+      preLoaderRoute: typeof InsightsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/method': {
@@ -178,7 +218,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AsoRockRoute: AsoRockRoute,
+  ContactRoute: ContactRoute,
   ElectionsRoute: ElectionsRoute,
+  InsightsRoute: InsightsRoute,
   MethodRoute: MethodRoute,
   MonitorRoute: MonitorRoute,
   Results2023Route: Results2023Route,
