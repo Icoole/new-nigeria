@@ -77,13 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "IReV Live Result Monitor" },
+      { title: "TogetherNigeria — Nigerian election data platform" },
       {
         name: "description",
         content:
           "Live INEC IReV polling-unit uploads, Form EC8A sheets and coverage tracking for Nigerian elections.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "TogetherNigeria" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
