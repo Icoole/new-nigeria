@@ -45,14 +45,16 @@ function Insights() {
     const rows = STATE_RESULTS_2023.map((s) => {
       const cast = stateTotal(s);
       const sorted = [...PARTY_CODES].sort((a, b) => s.votes[b] - s.votes[a]);
-      const margin = ((s.votes[sorted[0]] - s.votes[sorted[1]]) / cast) * 100;
+      const first = sorted[0] as PartyCode;
+      const second = sorted[1] as PartyCode;
+      const margin = ((s.votes[first] - s.votes[second]) / cast) * 100;
       return {
         state: s.state,
         zone: s.zone,
         cast,
         turnout: (cast / s.registered) * 100,
         leader: leaderOf(s),
-        runnerUp: sorted[1],
+        runnerUp: second,
         margin,
         share: (s.votes[focus] / cast) * 100,
         contribution: (s.votes[focus] / totals[focus]) * 100,
@@ -123,7 +125,7 @@ function Insights() {
         />
         <Stat
           label="Candidate"
-          value={PARTY_META[focus].candidate.split(" ").slice(-1)[0]}
+          value={PARTY_META[focus].candidate.split(" ").slice(-1)[0] ?? ""}
           sub={PARTY_META[focus].name}
         />
       </section>
@@ -142,7 +144,7 @@ function Insights() {
                   <span
                     className="block h-full rounded-full"
                     style={{
-                      width: `${(r.contribution / data.topTen[0].contribution) * 100}%`,
+                      width: `${(r.contribution / (data.topTen[0]?.contribution || 1)) * 100}%`,
                       backgroundColor: PARTY_META[focus].color,
                     }}
                   />
