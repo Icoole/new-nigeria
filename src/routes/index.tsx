@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { nationalTotals, STATE_RESULTS_2023, PARTY_META, PARTY_CODES } from "@/lib/results2023";
 import { buildContests } from "@/lib/contests";
+import { WHATSAPP_DEFAULT } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/")({
   head: () => ({
