@@ -16,3 +16,17 @@ export const getElectionFeed = createServerFn({ method: "GET" })
     ]);
     return { stats, uploads, lgas, fetchedAt: new Date().toISOString() };
   });
+
+export const getElectionStructure = createServerFn({ method: "GET" })
+  .inputValidator((electionId: string) => String(electionId ?? ""))
+  .handler(async ({ data: electionId }) => {
+    const { fetchElectionStructure } = await import("./irev.server");
+    return fetchElectionStructure(electionId);
+  });
+
+export const getWardPus = createServerFn({ method: "GET" })
+  .inputValidator((input: { electionId: string; wardId: string }) => input)
+  .handler(async ({ data }) => {
+    const { fetchWardPus } = await import("./irev.server");
+    return fetchWardPus(data.electionId, data.wardId);
+  });
