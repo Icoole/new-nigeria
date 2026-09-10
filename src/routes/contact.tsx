@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 
+import { WHATSAPP_NUMBER, whatsappLink } from "@/lib/whatsapp";
+
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
@@ -33,11 +35,9 @@ function Contact() {
     scope: "",
   });
 
-  const mailto = `mailto:hello@togethernigeria.org?subject=${encodeURIComponent(
-    `Deployment request — ${form.org || form.name || "TogetherNigeria"}`,
-  )}&body=${encodeURIComponent(
-    `Name: ${form.name}\nOrganisation: ${form.org}\nEmail: ${form.email}\nTeam type: ${form.role}\n\nWhat we need:\n${form.scope}`,
-  )}`;
+  const chatUrl = whatsappLink(
+    `Deployment request — ${form.org || form.name || "TogetherNigeria"}\n\nName: ${form.name}\nOrganisation: ${form.org}\nEmail: ${form.email}\nTeam type: ${form.role}\n\nWhat we need:\n${form.scope}`,
+  );
 
   return (
     <main className="mx-auto w-full max-w-4xl px-5 py-10 md:px-8 md:py-14">
@@ -57,7 +57,7 @@ function Contact() {
         onSubmit={(e) => {
           e.preventDefault();
           setSent(true);
-          window.location.href = mailto;
+          window.open(chatUrl, "_blank", "noopener,noreferrer");
         }}
       >
         <div className="grid gap-4 sm:grid-cols-2">
@@ -114,22 +114,23 @@ function Contact() {
             Start a conversation
           </button>
           <a
-            href="mailto:hello@togethernigeria.org"
+            href={chatUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm text-muted-foreground hover:text-foreground"
           >
-            hello@togethernigeria.org
+            WhatsApp {WHATSAPP_NUMBER}
           </a>
         </div>
         {sent ? (
           <p className="rounded-lg bg-live/10 px-3 py-2 text-sm text-live">
-            Your email app should open with the request ready to send.
+            WhatsApp should open with your request ready to send.
           </p>
         ) : null}
       </form>
 
       <p className="mt-4 text-xs text-muted-foreground">
-        The contact address above is a placeholder — send me the real address you want
-        enquiries delivered to and I will swap it in.
+        Enquiries go straight to WhatsApp on {WHATSAPP_NUMBER}.
       </p>
     </main>
   );
