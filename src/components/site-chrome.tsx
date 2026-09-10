@@ -1,9 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 
+import { WHATSAPP_DEFAULT } from "@/lib/whatsapp";
+
 const NAV = [
   { to: "/monitor", label: "The Monitor" },
   { to: "/elections", label: "Election Hub" },
+  { to: "/parties", label: "Parties" },
+  { to: "/polling-units", label: "Polling Units" },
   { to: "/results-2023", label: "2023 Map" },
   { to: "/aso-rock", label: "Path to Aso Rock" },
   { to: "/insights", label: "Insights" },
@@ -35,12 +39,14 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <Link
-            to="/contact"
+          <a
+            href={WHATSAPP_DEFAULT}
+            target="_blank"
+            rel="noopener noreferrer"
             className="hidden rounded-md bg-primary px-3.5 py-1.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 sm:inline-flex"
           >
-            Plan a deployment
-          </Link>
+            Chat on WhatsApp
+          </a>
           <button
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
@@ -118,6 +124,16 @@ export function SiteFooter() {
               <Link to="/contact" className="text-muted-foreground hover:text-foreground">
                 Contact
               </Link>
+            </li>
+            <li>
+              <a
+                href={WHATSAPP_DEFAULT}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                WhatsApp +234 902 091 5799 ↗
+              </a>
             </li>
             <li>
               <a

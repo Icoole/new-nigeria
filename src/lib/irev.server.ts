@@ -153,3 +153,65 @@ export async function fetchLgas(electionId: string): Promise<LgaRow[]> {
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
 }
+
+/* ------------------------------------------------------------------ *
+ * Region drill-down: election -> LGA -> ward -> every polling unit.
+ * IReV publishes structure and scanned Form EC8A sheets per polling
+ * unit; it does not publish machine-readable party votes, so nothing
+ * party-level is claimed here.
+ * ------------------------------------------------------------------ */
+
+export type WardNode = { id: string; name: string; code: string };
+export type LgaNode = { id: string; name: string; code: string; wards: WardNode[] };
+
+export async function fetchElectionStructure(electionId: string): Promise<LgaNode[]> {
+  const data = await irevGet<
+    Array<{
+      _id: string;
+      lga?: { _id?: string; name?: string; code?: string } | null;
+      wards?: Array<{ _id: string; name: string; code?: string }>;
+    }>
+  >(`/elections/${electionId}/lga`);
+  return data
+    .map((l) => ({
+      id: l.lga?._id ?? l._id,
+      name: l.lga?.name ?? "Unknown LGA",
+      code: l.lga?.code ?? "",
+      wards: (l.wards ?? [])
+        .map((w) => ({ id: w._id, name: w.name, code: w.code ?? "" }))
+        .sort((a, b) => a.name.localeCompare(b.name)),
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+export type PuRow = {
+  id: string;
+  name: string;
+  puCode: string;
+  lga: string;
+  ward: string;
+  sheetUrl: string | null;
+  uploadedAt: string | null;
+  replaced: boolean;
+};
+
+export async function fetchWardPus(
+  electionId: string,
+  wardId: string,
+): Promise<PuRow[]> {
+  const data = await irevGet<IrevRecentPu[]>(
+    `/elections/${electionId}/pus?ward=${encodeURIComponent(wardId)}`,
+  );
+  return data
+    .map((p) => ({
+      id: p._id,
+      name: p.name,
+      puCode: p.pu_code,
+      lga: p.polling_unit?.lga?.name ?? "—",
+      ward: p.polling_unit?.ward?.name ?? "—",
+      sheetUrl: p.document?.url ?? null,
+      uploadedAt: p.document?.updated_at ?? null,
+      replaced: Array.isArray(p.old_documents) && p.old_documents.length > 0,
+    }))
+    .sort((a, b) => a.puCode.localeCompare(b.puCode));
+}
