@@ -344,12 +344,14 @@ function Home() {
               support.
             </p>
           </div>
-          <Link
-            to="/contact"
+          <a
+            href={WHATSAPP_DEFAULT}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90"
           >
-            Start a conversation
-          </Link>
+            Start a conversation on WhatsApp
+          </a>
         </div>
       </section>
     </main>
