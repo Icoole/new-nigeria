@@ -16,6 +16,8 @@ import { Route as ElectionsRouteImport } from './routes/elections'
 import { Route as InsightsRouteImport } from './routes/insights'
 import { Route as MethodRouteImport } from './routes/method'
 import { Route as MonitorRouteImport } from './routes/monitor'
+import { Route as PartiesRouteImport } from './routes/parties'
+import { Route as PollingUnitsRouteImport } from './routes/polling-units'
 import { Route as Results2023RouteImport } from './routes/results-2023'
 import { Route as RumRouteImport } from './routes/rum'
 
@@ -54,6 +56,16 @@ const MonitorRoute = MonitorRouteImport.update({
   path: '/monitor',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PartiesRoute = PartiesRouteImport.update({
+  id: '/parties',
+  path: '/parties',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PollingUnitsRoute = PollingUnitsRouteImport.update({
+  id: '/polling-units',
+  path: '/polling-units',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Results2023Route = Results2023RouteImport.update({
   id: '/results-2023',
   path: '/results-2023',
@@ -73,6 +85,8 @@ export interface FileRoutesByFullPath {
   '/insights': typeof InsightsRoute
   '/method': typeof MethodRoute
   '/monitor': typeof MonitorRoute
+  '/parties': typeof PartiesRoute
+  '/polling-units': typeof PollingUnitsRoute
   '/results-2023': typeof Results2023Route
   '/rum': typeof RumRoute
 }
@@ -84,6 +98,8 @@ export interface FileRoutesByTo {
   '/insights': typeof InsightsRoute
   '/method': typeof MethodRoute
   '/monitor': typeof MonitorRoute
+  '/parties': typeof PartiesRoute
+  '/polling-units': typeof PollingUnitsRoute
   '/results-2023': typeof Results2023Route
   '/rum': typeof RumRoute
 }
@@ -96,6 +112,8 @@ export interface FileRoutesById {
   '/insights': typeof InsightsRoute
   '/method': typeof MethodRoute
   '/monitor': typeof MonitorRoute
+  '/parties': typeof PartiesRoute
+  '/polling-units': typeof PollingUnitsRoute
   '/results-2023': typeof Results2023Route
   '/rum': typeof RumRoute
 }
@@ -109,6 +127,8 @@ export interface FileRouteTypes {
     | '/insights'
     | '/method'
     | '/monitor'
+    | '/parties'
+    | '/polling-units'
     | '/results-2023'
     | '/rum'
   fileRoutesByTo: FileRoutesByTo
@@ -120,6 +140,8 @@ export interface FileRouteTypes {
     | '/insights'
     | '/method'
     | '/monitor'
+    | '/parties'
+    | '/polling-units'
     | '/results-2023'
     | '/rum'
   id:
@@ -131,6 +153,8 @@ export interface FileRouteTypes {
     | '/insights'
     | '/method'
     | '/monitor'
+    | '/parties'
+    | '/polling-units'
     | '/results-2023'
     | '/rum'
   fileRoutesById: FileRoutesById
@@ -143,6 +167,8 @@ export interface RootRouteChildren {
   InsightsRoute: typeof InsightsRoute
   MethodRoute: typeof MethodRoute
   MonitorRoute: typeof MonitorRoute
+  PartiesRoute: typeof PartiesRoute
+  PollingUnitsRoute: typeof PollingUnitsRoute
   Results2023Route: typeof Results2023Route
   RumRoute: typeof RumRoute
 }
@@ -198,6 +224,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MonitorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/parties': {
+      id: '/parties'
+      path: '/parties'
+      fullPath: '/parties'
+      preLoaderRoute: typeof PartiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/polling-units': {
+      id: '/polling-units'
+      path: '/polling-units'
+      fullPath: '/polling-units'
+      preLoaderRoute: typeof PollingUnitsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/results-2023': {
       id: '/results-2023'
       path: '/results-2023'
@@ -223,6 +263,8 @@ const rootRouteChildren: RootRouteChildren = {
   InsightsRoute: InsightsRoute,
   MethodRoute: MethodRoute,
   MonitorRoute: MonitorRoute,
+  PartiesRoute: PartiesRoute,
+  PollingUnitsRoute: PollingUnitsRoute,
   Results2023Route: Results2023Route,
   RumRoute: RumRoute,
 }

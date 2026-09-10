@@ -33,8 +33,6 @@ export const Route = createFileRoute("/polling-units")({
   component: PollingUnits,
 });
 
-export default function noop() {}
-
 function PollingUnits() {
   const { data: elections } = useSuspenseQuery(electionsQuery);
   const [electionId, setElectionId] = useState(elections[0]?.id ?? "");
