@@ -8,8 +8,9 @@ import type { LgaRow, PartyTally, RumSnapshot } from "@/lib/rum.server";
 const rumQuery = queryOptions({
   queryKey: ["rum", "snapshot"],
   queryFn: () => getRumSnapshot(),
-  staleTime: 60_000,
-  refetchInterval: 60_000,
+  staleTime: 20_000,
+  refetchInterval: 20_000,
+  refetchIntervalInBackground: true,
 });
 
 export const Route = createFileRoute("/rum")({
