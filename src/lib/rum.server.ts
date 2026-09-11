@@ -138,7 +138,7 @@ export type RumSnapshot = {
 };
 
 let cache: { at: number; data: RumSnapshot } | null = null;
-const TTL = 60_000;
+const TTL = 20_000;
 
 function leaderOf(votes: Record<string, number>) {
   let best: string | null = null;

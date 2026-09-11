@@ -55,7 +55,8 @@ function PollingUnits() {
     queryKey: ["irev", "pus", electionId, wardId],
     queryFn: () => getWardPus({ data: { electionId, wardId: wardId! } }),
     enabled: Boolean(electionId && wardId),
-    refetchInterval: 60_000,
+    refetchInterval: 20_000,
+    refetchIntervalInBackground: true,
     staleTime: 30_000,
   });
 

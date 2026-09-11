@@ -72,7 +72,8 @@ function Dashboard() {
     queryKey: ["irev", "feed", electionId],
     queryFn: () => getElectionFeed({ data: electionId }),
     enabled: Boolean(electionId),
-    refetchInterval: 60_000,
+    refetchInterval: 20_000,
+    refetchIntervalInBackground: true,
     staleTime: 30_000,
   });
 
@@ -106,7 +107,7 @@ function Dashboard() {
           </p>
           <p className="stat-value mono-code text-2xl text-live">{clock}</p>
           <p className="mt-1 text-xs text-muted-foreground">
-            Auto-refresh every 60s · synced {timeAgo(feed.data?.fetchedAt ?? null)}
+            Auto-refresh every 20s · synced {timeAgo(feed.data?.fetchedAt ?? null)}
           </p>
         </div>
       </header>
