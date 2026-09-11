@@ -14,7 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ec8a_readings: {
+        Row: {
+          accredited: number | null
+          confidence: number | null
+          created_at: string
+          election_id: string
+          id: string
+          lga: string | null
+          note: string | null
+          pu_code: string | null
+          pu_id: string
+          pu_name: string | null
+          rejected_votes: number | null
+          sheet_updated_at: string | null
+          sheet_url: string
+          status: string
+          total_votes: number | null
+          valid_votes: number | null
+          votes: Json
+          ward: string | null
+        }
+        Insert: {
+          accredited?: number | null
+          confidence?: number | null
+          created_at?: string
+          election_id: string
+          id?: string
+          lga?: string | null
+          note?: string | null
+          pu_code?: string | null
+          pu_id: string
+          pu_name?: string | null
+          rejected_votes?: number | null
+          sheet_updated_at?: string | null
+          sheet_url: string
+          status?: string
+          total_votes?: number | null
+          valid_votes?: number | null
+          votes?: Json
+          ward?: string | null
+        }
+        Update: {
+          accredited?: number | null
+          confidence?: number | null
+          created_at?: string
+          election_id?: string
+          id?: string
+          lga?: string | null
+          note?: string | null
+          pu_code?: string | null
+          pu_id?: string
+          pu_name?: string | null
+          rejected_votes?: number | null
+          sheet_updated_at?: string | null
+          sheet_url?: string
+          status?: string
+          total_votes?: number | null
+          valid_votes?: number | null
+          votes?: Json
+          ward?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
